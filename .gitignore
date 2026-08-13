@@ -1,0 +1,58 @@
+# 编译产物
+*.o
+*.a
+*.so
+*.elf
+*.bin
+*.hex
+*.vcd
+*.fst
+*.dump
+
+# Verilator 产物
+obj_dir/
+*.mk
+
+# 仿真产物
+*.wlf
+*.log
+transcript*
+xsim.dir/
+webtalk*.log
+xvlog.log
+xelab.log
+
+# Vivado 产物
+*.jou
+*.str
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.srcs/
+*.xpr
+*.xo
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# 临时文件
+*.tmp
+*.bak
