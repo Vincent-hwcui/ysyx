@@ -1,154 +1,112 @@
 # 开发环境搭建指南
 
+> 针对"一生一芯"项目的开发环境配置，涵盖 F~A 阶段所需全部工具。
+
 ## 1. 操作系统
 
-推荐使用 **Linux (Ubuntu 22.04 LTS)** 作为主要开发环境。
+推荐使用 **Linux (Ubuntu 22.04 LTS)**。
 
-如使用 Windows，建议通过以下方式之一：
-- **WSL2 + Ubuntu** (推荐)
-- **双系统安装 Ubuntu**
-- **Docker 容器**
+如使用 Windows，建议：
+- **WSL2 + Ubuntu**（推荐）
+- Docker 容器
+- 双系统
 
-## 2. 基础工具安装
+## 2. 基础工具
 
 ```bash
-# 更新系统
 sudo apt update && sudo apt upgrade -y
 
-# 安装基础开发工具
-sudo apt install -y build-essential git make python3 python3-pip
+# 基础开发工具
+sudo apt install -y build-essential git make gdb python3 python3-pip
 
-# 安装 GTKWave（波形查看器）
+# 图形相关（NEMU 需要）
+sudo apt install -y libsdl2-dev libreadline-dev
+
+# GTKWave（波形查看器）
 sudo apt install -y gtkwave
+
+# 文本处理工具
+sudo apt install -y bison flex
 ```
 
 ## 3. RISC-V 工具链
 
-### 3.1 安装 RISC-V GCC 交叉编译工具链
+### 3.1 交叉编译工具链
 
 ```bash
-# 方法一：从源码编译（推荐，可自定义）
+# 从源码编译
 git clone https://github.com/riscv/riscv-gnu-toolchain
 cd riscv-gnu-toolchain
-./configure --prefix=/opt/riscv
+./configure --prefix=/opt/riscv --with-arch=rv32im --with-abi=ilp32
 make -j$(nproc)
-
-# 方法二：直接安装预编译版本
-sudo apt install -y gcc-riscv64-unknown-elf
 ```
 
-### 3.2 验证安装
+### 3.2 验证
 
 ```bash
-riscv64-unknown-elf-gcc --version
+/opt/riscv/bin/riscv32-unknown-elf-gcc --version
 ```
 
-## 4. 仿真工具
-
-### 4.1 Verilator
+## 4. 仿真与综合工具
 
 ```bash
-# 安装 Verilator
+# Verilator（RTL 仿真）
 sudo apt install -y verilator
 
-# 验证
-verilator --version
-```
-
-### 4.2 Icarus Verilog (备用)
-
-```bash
+# Icarus Verilog（备用仿真器）
 sudo apt install -y iverilog
-```
 
-## 5. Chisel 开发环境 (如使用 Chisel)
-
-### 5.1 安装 Java JDK
-
-```bash
-sudo apt install -y openjdk-17-jdk
-```
-
-### 5.2 安装 sbt
-
-```bash
-echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
-echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee /etc/apt/sources.list.d/sbt_old.list
-curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add -
-sudo apt update
-sudo apt install -y sbt
-```
-
-## 6. EDA 工具
-
-### 6.1 Vivado (FPGA 开发)
-
-- 从 AMD/Xilinx 官网下载 Vivado Design Suite
-- 推荐安装 Vivado ML Edition (免费版即可)
-
-### 6.2 开源 EDA 工具 (用于流片物理设计)
-
-```bash
-# OpenROAD (开源物理设计流程)
-sudo apt install -y openroad
-
-# yosys (开源综合工具)
+# yosys（逻辑综合）
 sudo apt install -y yosys
-
-# magic (版图编辑器)
-sudo apt install -y magic
-
-# netgen (LVS 验证)
-sudo apt install -y netgen
 ```
 
-## 7. Spike 模拟器 (RISC-V ISA Simulator)
+## 5. Logisim（F 阶段）
+
+下载 Logisim 图形化数字电路模拟器：
+- 官网: <http://www.cburch.com/logisim/>
+- 或使用 Logisim-evolution（增强版）
+
+## 6. 获取 ysyx-workbench（一生一芯工作区）
 
 ```bash
-git clone https://github.com/riscv-software-src/riscv-isa-sim
-cd riscv-isa-sim
-mkdir build && cd build
-../configure --prefix=/opt/riscv
-make -j$(nproc)
-sudo make install
+git clone https://github.com/OSCPU/ysyx-workbench.git
 ```
 
-## 8. Git 配置
+工作区包含 NEMU、AM 等子模块，需要初始化子模块：
 
 ```bash
-# 配置用户名和邮箱
-git config --global user.name "你的名字"
-git config --global user.email "你的邮箱"
-
-# 配置默认分支名
-git config --global init.defaultBranch main
+cd ysyx-workbench
+git submodule update --init
 ```
 
-## 9. 验证环境
-
-运行以下命令确认所有工具已正确安装：
+## 7. 验证环境
 
 ```bash
 echo "=== 环境检查 ==="
 echo "GCC: $(gcc --version | head -1)"
-echo "RISC-V GCC: $(riscv64-unknown-elf-gcc --version | head -1)"
+echo "RISC-V GCC: $(riscv32-unknown-elf-gcc --version | head -1)"
 echo "Verilator: $(verilator --version)"
 echo "GTKWave: $(gtkwave --version 2>/dev/null || echo 'not found')"
-echo "Git: $(git --version)"
-echo "Python: $(python3 --version)"
+echo "Make: $(make --version | head -1)"
 echo "=== 检查完成 ==="
 ```
 
-## 10. 常见问题
+## 8. 常见问题
 
-### Q: WSL2 中无法使用 GTKWave 图形界面？
+### Q: WSL2 无法显示图形界面？
+安装 Windows 的 X Server（VcXsrv/Xming），设置 `DISPLAY` 环境变量。NEMU 的 SDL 图形模式和 GTKWave 需要图形环境。
 
-确保 Windows 上安装了 X Server（如 VcXsrv 或 Xming），并设置 `DISPLAY` 环境变量。
+### Q: NEMU 编译报错缺少 SDL2？
+```bash
+sudo apt install -y libsdl2-dev libsdl2-2.0-0
+```
 
-### Q: RISC-V 工具链编译时间太长？
+### Q: 差分测试 (difftest) 需要什么？
+需要 NEMU 编译出动态库（`.so`），NPC 通过 DPI-C 接口调用，与 Verilator 配合使用。
 
-使用 `make -j$(nproc)` 利用多核加速，或在[预编译版本页面](https://github.com/riscv-software-src/riscv-gnu-toolchain/releases)下载。
+### Q: 工具链编译太慢？
+`make -j$(nproc)` 用多核加速。零基础建议直接使用官方预编译版本。
 
-### Q: Chisel 编译速度慢？
+---
 
-sbt 首次编译需要下载大量依赖，后续编译会使用缓存。可以配置 sbt 的国内镜像加速。
+*更详细的安装问题请参考[官方文档](https://ysyx.oscc.cc/docs/2407/)的对应章节。*
