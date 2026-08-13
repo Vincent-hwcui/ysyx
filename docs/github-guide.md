@@ -12,7 +12,7 @@ git config --global user.email "你的邮箱@example.com"
 ## 第一步：在 GitHub 上创建空仓库
 
 1. 打开 [https://github.com/new](https://github.com/new)
-2. 填写仓库名称：`one-student-one-chip`（或你喜欢的名字）
+2. 填写仓库名称：`ysyx`（或你喜欢的名字）
 3. 填写描述：`一生一芯学习记录 - 从数字逻辑到流片的完整历程`
 4. 选择 **Public**（公开，这样导师可以查看）
 5. **不要**勾选以下选项（仓库已初始化，避免冲突）：
@@ -26,10 +26,10 @@ git config --global user.email "你的邮箱@example.com"
 将下面的 `你的用户名` 替换为你的 GitHub 用户名：
 
 ```bash
-cd one-student-one-chip
+cd ysyx
 
 # 添加远程仓库
-git remote add origin https://github.com/你的用户名/one-student-one-chip.git
+git remote add origin https://github.com/你的用户名/ysyx.git
 
 # 验证
 git remote -v
@@ -64,7 +64,7 @@ git push -u origin main
 - `cpu-design`
 - `chip-design`
 - `verilog`
-- `one-student-one-chip`
+- `ysyx`
 - `learning-notes`
 
 ## 日常使用

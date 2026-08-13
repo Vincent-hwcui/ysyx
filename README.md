@@ -1,4 +1,4 @@
-# One Student One Chip | 一生一芯学习记录
+# ysyx | 一生一芯学习记录
 
 > 记录本人参加"一生一芯"（v24.07）课程的学习历程，从数字逻辑到 RISC-V 处理器设计、SoC 集成直至流片的完整过程。
 >
@@ -40,7 +40,7 @@
 ## 仓库结构
 
 ```
-one-student-one-chip/
+ysyx/
 ├── README.md                  # 项目主页（当前文件）
 ├── docs/                      # 文档
 │   ├── learning-roadmap.md    # 学习路线图（官方 F~S 阶段）
