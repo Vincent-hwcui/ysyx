@@ -68,6 +68,7 @@ one-student-one-chip/
 - [详细学习路线图](./docs/learning-roadmap.md)
 - [开发环境搭建指南](./docs/environment-setup.md)
 - [学习资源汇总](./docs/resources.md)
+- [GitHub 仓库创建与推送指南](./docs/github-guide.md)
 
 ## License
 
