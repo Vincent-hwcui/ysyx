@@ -56,3 +56,9 @@ Thumbs.db
 # 临时文件
 *.tmp
 *.bak
+
+# Logisim 自动保存文件（不提交）
+*.circ.autosave
+*.circ.autosave.*
+.logisim-*.circ.autosave
+*.circ.bak
