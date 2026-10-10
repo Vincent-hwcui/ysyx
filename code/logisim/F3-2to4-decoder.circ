@@ -42,8 +42,110 @@
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="clabelup" val="west"/>
     <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(1160,640)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1160,660)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1160,680)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1160,700)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1170,450)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1170,470)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1170,490)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(1170,510)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(760,540)" name="Power"/>
+    <comp lib="0" loc="(760,600)" name="Transistor">
+      <a name="facing" val="south"/>
+      <a name="selloc" val="bl"/>
+    </comp>
+    <comp lib="0" loc="(760,680)" name="Transistor">
+      <a name="facing" val="south"/>
+      <a name="selloc" val="bl"/>
+      <a name="type" val="n"/>
+    </comp>
+    <comp lib="0" loc="(760,720)" name="Ground"/>
+    <comp lib="0" loc="(790,450)" name="Pin">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <comp lib="0" loc="(790,470)" name="Pin">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <comp lib="0" loc="(790,490)" name="Pin">
+      <a name="appearance" val="classic"/>
+    </comp>
     <comp loc="(1090,450)" name="decoder24"/>
     <comp loc="(1090,640)" name="decoder24"/>
+    <wire from="(1090,450)" to="(1170,450)"/>
+    <wire from="(1090,470)" to="(1170,470)"/>
+    <wire from="(1090,490)" to="(1170,490)"/>
+    <wire from="(1090,510)" to="(1170,510)"/>
+    <wire from="(1090,640)" to="(1160,640)"/>
+    <wire from="(1090,660)" to="(1160,660)"/>
+    <wire from="(1090,680)" to="(1160,680)"/>
+    <wire from="(1090,700)" to="(1160,700)"/>
+    <wire from="(690,520)" to="(690,610)"/>
+    <wire from="(690,520)" to="(800,520)"/>
+    <wire from="(690,610)" to="(720,610)"/>
+    <wire from="(720,580)" to="(720,610)"/>
+    <wire from="(720,580)" to="(740,580)"/>
+    <wire from="(720,610)" to="(720,640)"/>
+    <wire from="(720,640)" to="(740,640)"/>
+    <wire from="(740,640)" to="(740,660)"/>
+    <wire from="(760,540)" to="(760,560)"/>
+    <wire from="(760,600)" to="(760,610)"/>
+    <wire from="(760,610)" to="(760,620)"/>
+    <wire from="(760,610)" to="(810,610)"/>
+    <wire from="(760,620)" to="(770,620)"/>
+    <wire from="(760,640)" to="(780,640)"/>
+    <wire from="(760,680)" to="(770,680)"/>
+    <wire from="(760,720)" to="(780,720)"/>
+    <wire from="(770,620)" to="(770,680)"/>
+    <wire from="(780,640)" to="(780,720)"/>
+    <wire from="(790,450)" to="(840,450)"/>
+    <wire from="(790,470)" to="(850,470)"/>
+    <wire from="(790,490)" to="(800,490)"/>
+    <wire from="(800,490)" to="(800,520)"/>
+    <wire from="(800,490)" to="(830,490)"/>
+    <wire from="(810,500)" to="(810,610)"/>
+    <wire from="(810,500)" to="(870,500)"/>
+    <wire from="(830,490)" to="(830,680)"/>
+    <wire from="(830,680)" to="(870,680)"/>
+    <wire from="(840,450)" to="(840,640)"/>
+    <wire from="(840,450)" to="(870,450)"/>
+    <wire from="(840,640)" to="(870,640)"/>
+    <wire from="(850,470)" to="(850,660)"/>
+    <wire from="(850,470)" to="(870,470)"/>
+    <wire from="(850,660)" to="(870,660)"/>
+    <wire from="(870,490)" to="(870,500)"/>
   </circuit>
   <circuit name="OR2">
     <a name="appearance" val="logisim_evolution"/>
