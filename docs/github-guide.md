@@ -1,5 +1,7 @@
 # GitHub 仓库创建与推送指南
 
+> 只想看"每次更新进度该怎么提交"？直接跳到 [日常流程速查](#日常流程速查)。下面是首次建仓库的完整步骤。
+
 ## 前置准备
 
 确保已配置 Git 用户名和邮箱：
@@ -67,35 +69,68 @@ git push -u origin main
 - `ysyx`
 - `learning-notes`
 
-## 日常使用
+## 日常流程速查
 
-### 提交学习记录
-
-每次学习后，将笔记和代码放入对应目录，然后：
+每次更新学习进度都按这四条走。先进入仓库目录：
 
 ```bash
-# 查看改动
-git status
+cd "C:\Users\17329\WorkBuddy\2026-08-13-15-26-11\ysyx"
+```
 
-# 添加所有改动
-git add -A
+然后：
 
-# 提交
-git commit -m "docs: 完成数字逻辑基础笔记"
+```bash
+git status                          # 1. 看改了哪些文件
+git add -A                          # 2. 把改动放进待提交区
+git commit -m "docs: 更新 F3 进度"   # 3. 记录一次快照
+git push                            # 4. 推到 GitHub
+```
 
-# 推送
-git push
+每条命令在做什么：
+
+1）`git status` 列出所有改动过的文件。**提交前一定要扫一眼**，防止把编译产物、自动保存文件之类不该提交的东西带上。
+2）`git add -A` 把改动放进待提交区。只想提交某一个文件时，换成 `git add 文件路径`，比如 `git add logs/progress.md`。
+3）`git commit -m "..."` 正式记录一次快照。message 的写法见下面那张表。
+4）`git push` 推到 GitHub。**只 commit 不 push 的话，远程仓库上什么都没有**，助教也看不到。
+
+一次 commit 只讲一件事。可以连续做多轮 add + commit，比如先提交笔记、再提交代码，这样 `git log` 读起来清楚得多。
+
+### 第一次推送会要求登录
+
+本机已经配好了 Git Credential Manager（凭证助手 = manager），所以**不需要自己建 Personal Access Token**：
+
+`git push` 时会自动弹出浏览器窗口，登录 GitHub 账号并点授权，窗口自己关掉就算成功，之后会永久记住，不用再登录。
+
+如果弹出的不是浏览器，而是终端里的 `Username / Password` 提示，说明走了另一条认证路径：
+
+1）Username 填 GitHub 用户名（Qiaomao39）
+2）Password **不能填 GitHub 登录密码**，要填 Personal Access Token
+3）Token 生成地址：<https://github.com/settings/tokens> → Generate new token (classic) → 勾选 `repo` → 生成后立刻复制（只显示一次）
+
+### 改错了怎么退
+
+```bash
+git restore 文件名                # 撤销这个文件还没 add 的修改
+git restore --staged 文件名       # 把它从待提交区拿出来（改动本身还在）
+git log --oneline -10             # 看最近 10 次提交
+git diff                          # 看还没 add 的具体改动内容
+git diff --staged                 # 看已经 add、即将提交的改动内容
 ```
 
 ### 推荐的 commit message 前缀
 
+格式统一为 `前缀: 做了什么`，一行说清。
+
 | 前缀 | 用途 | 示例 |
 |:---:|------|------|
-| `docs:` | 笔记/文档更新 | `docs: 添加 RV32I 指令格式笔记` |
+| `docs:` | 笔记/文档/进度日志 | `docs: 更新 F3 进度日志` |
 | `feat:` | 新功能/新代码 | `feat: 实现 ALU 模块` |
 | `fix:` | 修复 bug | `fix: 修复流水线转发逻辑错误` |
 | `test:` | 添加测试 | `test: 添加 CPU 指令级测试` |
 | `chore:` | 杂项维护 | `chore: 更新 .gitignore` |
+| `F/E/D/C/B/A/S:` | 某阶段的任务产出 | `F3: 完成 3-8 译码器` |
+
+阶段号那一行是给"一生一芯"用的：助教看 `git log` 就是看你在推进哪个阶段，所以电路、笔记这类产出最好带上阶段号。
 
 ## 给导师看时的小建议
 
