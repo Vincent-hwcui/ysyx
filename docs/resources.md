@@ -10,7 +10,7 @@
 
 ## 会读到的开源项目
 
-NEMU（指令集模拟器）在 [NJU-ProjectN/nemu](https://github.com/NJU-ProjectN/nemu)，AM（抽象机器运行时）在 [NJU-ProjectN/abstract-machine](https://github.com/NJU-ProjectN/abstract-machine)，官方的工作区模板在 [OSCPU/ysyx-workbench](https://github.com/OSCPU/ysyx-workbench)。这三个仓库的代码都是要读的，特别是 NEMU，后面验证处理器全靠拿它当参考。
+NEMU（指令集模拟器）在 [NJU-ProjectN/nemu](https://github.com/NJU-ProjectN/nemu)，AM（抽象机器运行时）在 [NJU-ProjectN/abstract-machine](https://github.com/NJU-ProjectN/abstract-machine)，官方的工作区模板在 [OSCPU/ysyx-workbench](https://github.com/OSCPU/ysyx-workbench)。这三个仓库的代码都要读，特别是 NEMU，后面验证处理器要拿它当参考。
 
 ## 教材
 
