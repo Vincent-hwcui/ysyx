@@ -1,112 +1,17 @@
-# 开发环境搭建指南
+# 开发环境搭建
 
-> 针对"一生一芯"项目的开发环境配置，涵盖 F~A 阶段所需全部工具。
+这一段还没真正动手，先把想到的记下来，等做 E3 的时候再补实际踩过的坑。
 
-## 1. 操作系统
+## 现在的情况
 
-推荐使用 **Linux (Ubuntu 22.04 LTS)**。
+日常在 Windows 上，F 阶段用的 Logisim 是图形界面软件，直接跑没问题。麻烦在后面：NEMU、AM、RISC-V 工具链、Verilator 这一串基本都在 Linux 下用，官方也是按 Ubuntu 22.04 写的讲义。
 
-如使用 Windows，建议：
-- **WSL2 + Ubuntu**（推荐）
-- Docker 容器
-- 双系统
+本来想走 WSL2，但**这台机器上 WSL 被安全策略挡住了，起不来**，所以要么开个虚拟机装 Ubuntu，要么找台 Linux 机器。这件事先记着，等 F 阶段收尾之前解决掉，别拖到 E 阶段卡壳。
 
-## 2. 基础工具
+## 到时候需要装的东西
 
-```bash
-sudo apt update && sudo apt upgrade -y
+分四块。基础工具是编译器和调试那一套（gcc、make、gdb、python3），NEMU 还需要 SDL2 和 readline 的库来支持图形和命令行交互。第二块是 RISC-V 交叉编译工具链，官方的做法是从源码编，参数按 rv32im/ilp32 来配，编完用 `riscv32-unknown-elf-gcc --version` 验一下。第三块是仿真和综合：Verilator 用来跑 RTL 仿真，GTKWave 看波形，yosys 做逻辑综合。第四块是官方的工作区 ysyx-workbench，clone 下来之后记得 `git submodule update --init` 把 NEMU 和 AM 这些子模块拉全。
 
-# 基础开发工具
-sudo apt install -y build-essential git make gdb python3 python3-pip
+## 暂时不确定的
 
-# 图形相关（NEMU 需要）
-sudo apt install -y libsdl2-dev libreadline-dev
-
-# GTKWave（波形查看器）
-sudo apt install -y gtkwave
-
-# 文本处理工具
-sudo apt install -y bison flex
-```
-
-## 3. RISC-V 工具链
-
-### 3.1 交叉编译工具链
-
-```bash
-# 从源码编译
-git clone https://github.com/riscv/riscv-gnu-toolchain
-cd riscv-gnu-toolchain
-./configure --prefix=/opt/riscv --with-arch=rv32im --with-abi=ilp32
-make -j$(nproc)
-```
-
-### 3.2 验证
-
-```bash
-/opt/riscv/bin/riscv32-unknown-elf-gcc --version
-```
-
-## 4. 仿真与综合工具
-
-```bash
-# Verilator（RTL 仿真）
-sudo apt install -y verilator
-
-# Icarus Verilog（备用仿真器）
-sudo apt install -y iverilog
-
-# yosys（逻辑综合）
-sudo apt install -y yosys
-```
-
-## 5. Logisim（F 阶段）
-
-下载 Logisim 图形化数字电路模拟器：
-- 官网: <http://www.cburch.com/logisim/>
-- 或使用 Logisim-evolution（增强版）
-
-## 6. 获取 ysyx-workbench（一生一芯工作区）
-
-```bash
-git clone https://github.com/OSCPU/ysyx-workbench.git
-```
-
-工作区包含 NEMU、AM 等子模块，需要初始化子模块：
-
-```bash
-cd ysyx-workbench
-git submodule update --init
-```
-
-## 7. 验证环境
-
-```bash
-echo "=== 环境检查 ==="
-echo "GCC: $(gcc --version | head -1)"
-echo "RISC-V GCC: $(riscv32-unknown-elf-gcc --version | head -1)"
-echo "Verilator: $(verilator --version)"
-echo "GTKWave: $(gtkwave --version 2>/dev/null || echo 'not found')"
-echo "Make: $(make --version | head -1)"
-echo "=== 检查完成 ==="
-```
-
-## 8. 常见问题
-
-### Q: WSL2 无法显示图形界面？
-安装 Windows 的 X Server（VcXsrv/Xming），设置 `DISPLAY` 环境变量。NEMU 的 SDL 图形模式和 GTKWave 需要图形环境。
-
-### Q: NEMU 编译报错缺少 SDL2？
-```bash
-sudo apt install -y libsdl2-dev libsdl2-2.0-0
-```
-
-### Q: 差分测试 (difftest) 需要什么？
-需要 NEMU 编译出动态库（`.so`），NPC 通过 DPI-C 接口调用，与 Verilator 配合使用。
-
-### Q: 工具链编译太慢？
-`make -j$(nproc)` 用多核加速。零基础建议直接使用官方预编译版本。
-
----
-
-*更详细的安装问题请参考[官方文档](https://ysyx.oscc.cc/docs/2407/)的对应章节。*
+WSL 那条路走不通的情况下，虚拟机里跑 Verilator 和 GTKWave 卡不卡、需不需要配图形界面转发，这些等真装的时候再试。官方的文档里有一节专门讲环境问题，遇到报错先去那里对一遍。

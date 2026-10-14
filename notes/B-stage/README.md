@@ -1,64 +1,47 @@
 # B 阶段：SoC 系统设计
 
-> 总线设计、SoC 系统集成、时序分析、缓存优化、流水线处理器。
+这一段是把处理器做成一个完整系统，也是 F 到 B 里最重的一段，官方预估 85 小时。B 阶段的结业考核等同于流片考核，过了就能拿到 B 级认证和免费流片资格。
 
-## 阶段任务
+## 任务清单
 
-| 任务 | 内容 | 预估时间 | 状态 |
-|:---:|------|:---:|:---:|
-| B1 | 总线 | 10h | 🔲 |
-| B2 | SoC 计算机系统 | 30h | 🔲 |
-| B3 | 时序分析和优化 | 5h | 🔲 |
-| B4 | 性能优化和简易缓存 | 20h | 🔲 |
-| B5 | 流水线处理器 | 20h | 🔲 |
-| — | B 阶段流片准备与考核 | — | 🔲 |
+| 序号 | 任务 | 预估 |
+|:---:|---|:---:|
+| B1 | 总线 | 10h |
+| B2 | SoC 计算机系统 | 30h |
+| B3 | 时序分析和优化 | 5h |
+| B4 | 性能优化和简易缓存 | 20h |
+| B5 | 流水线处理器 | 20h |
 
-## 详细内容
+## 每项在做什么
 
-### B1 — 总线
-- 总线协议（AXI / AXI-Lite）
-- 总线互联（Crossbar / 共享总线）
-- 主从设备通信
+B1 讲总线：AXI 和 AXI-Lite 这类协议怎么用，互联结构（Crossbar 或者共享总线）怎么选，主设备和从设备之间怎么发起和响应一次传输。
 
-### B2 — SoC 计算机系统（核心，时间最长）
-- 将 NPC 处理器集成为完整 SoC
-- 集成 SRAM、ROM、UART、SPI 等外设
-- 地址空间映射
-- 中断控制器
-- 在 FPGA 上运行完整系统
+B2 是这一段最花时间的一项，30 小时。要把 NPC 处理器接成一个完整的 SoC：挂上 SRAM、ROM、UART、SPI 这些外设，规划地址空间怎么映射，再配一个中断控制器，最后在 FPGA 上把整个系统跑起来。前面每一段做的东西都是零散的模块，到这一项才拼成一台机器。
 
-### B3 — 时序分析和优化
-- 静态时序分析 (STA)
-- 关键路径优化
-- 时序约束
+B3 是时序分析和优化，5 小时。静态时序分析怎么看、关键路径通常出在哪、时序约束怎么写。
 
-### B4 — 性能优化和简易缓存
-- 实现简易 Cache
-- 理解局部性原理
-- 缓存性能分析
+B4 是性能优化和简易缓存，20 小时。Cache 的基本结构、局部性原理为什么成立、加上缓存之后性能怎么量。这一项顺带把 408 里缓存那块高频考点也过了一遍。
 
-### B5 — 流水线处理器
-- 将单周期 NPC 改造为流水线处理器
-- 冒险检测与处理（转发、停顿）
-- 流水线性能分析
+B5 是把单周期处理器改造成流水线，20 小时。数据冒险和控制冒险各怎么处理（转发还是停顿）、流水线拉起来之后性能怎么算。
 
-## 笔记文件
+## 笔记
 
-- `B1-bus.md` — 总线笔记
-- `B2-soc.md` — SoC 系统笔记
-- `B3-timing.md` — 时序分析笔记
-- `B4-cache.md` — 缓存笔记
-- `B5-pipeline.md` — 流水线笔记
+还没开始写。
 
-## 代码位置
+## 代码
 
-- SoC 系统: [code/npc/](../../code/npc/)（SoC 部分）
+SoC 相关的部分也放在 [code/npc/](../../code/npc/) 下。
 
-## 讲义与资源
+## 讲义和课件
 
-- [B1 讲义](https://ysyx.oscc.cc/docs/2407/b/1.html) | [课件](https://ysyx.oscc.cc/slides/2306/18.html#/) | [视频](https://www.bilibili.com/video/BV1gj411s7ah)
-- [B2 讲义](https://ysyx.oscc.cc/docs/2407/b/2.html) | [课件上](https://ysyx.oscc.cc/slides/2306/19.html#/) | [课件下](https://ysyx.oscc.cc/slides/2306/20.html#/) | [视频上](https://www.bilibili.com/video/BV1NC4y1u7K3) | [视频下](https://www.bilibili.com/video/BV1FC4y1k7mP)
-- [B3 讲义](https://ysyx.oscc.cc/docs/2407/b/3.html)
-- [B4 讲义](https://ysyx.oscc.cc/docs/2407/b/4.html) | [课件](https://ysyx.oscc.cc/slides/2306/21.html#/) | [视频](https://www.bilibili.com/video/BV1xr421F7ZP)
-- [B5 讲义](https://ysyx.oscc.cc/docs/2407/b/5.html) | [课件](https://ysyx.oscc.cc/slides/2306/22.html#/) | [视频](https://www.bilibili.com/video/BV1ZRtkeVEqw)
-- [B 阶段流片准备与考核](https://ysyx.oscc.cc/docs/2407/2306/basic/1.11.html)
+B1 [讲义](https://ysyx.oscc.cc/docs/2407/b/1.html)｜[课件](https://ysyx.oscc.cc/slides/2306/18.html#/)｜[视频](https://www.bilibili.com/video/BV1gj411s7ah)
+
+B2 [讲义](https://ysyx.oscc.cc/docs/2407/b/2.html)｜[课件上](https://ysyx.oscc.cc/slides/2306/19.html#/)｜[课件下](https://ysyx.oscc.cc/slides/2306/20.html#/)｜[视频上](https://www.bilibili.com/video/BV1NC4y1u7K3)｜[视频下](https://www.bilibili.com/video/BV1FC4y1k7mP)
+
+B3 [讲义](https://ysyx.oscc.cc/docs/2407/b/3.html)
+
+B4 [讲义](https://ysyx.oscc.cc/docs/2407/b/4.html)｜[课件](https://ysyx.oscc.cc/slides/2306/21.html#/)｜[视频](https://www.bilibili.com/video/BV1xr421F7ZP)
+
+B5 [讲义](https://ysyx.oscc.cc/docs/2407/b/5.html)｜[课件](https://ysyx.oscc.cc/slides/2306/22.html#/)｜[视频](https://www.bilibili.com/video/BV1ZRtkeVEqw)
+
+[B 阶段结业考核申请](https://ysyx.oscc.cc/docs/2407/2306/basic/1.11.html)

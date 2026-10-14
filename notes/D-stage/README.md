@@ -1,64 +1,47 @@
 # D 阶段：正式学习
 
-> 完善 NEMU 模拟器，理解程序机器级表示，用 RTL 实现迷你 RISC-V 处理器，掌握设备与 IO。
+这一段开始从"画电路"转到"写软件 + 写 RTL"，前后要写的东西比较多。官方预估 34 小时。
 
-## 阶段任务
+## 任务清单
 
-| 任务 | 内容 | 预估时间 | 状态 |
-|:---:|------|:---:|:---:|
-| D1 | 支持 RV32IM 的 NEMU | 10h | 🔲 |
-| D2 | 程序的机器级表示 | 4h | 🔲 |
-| D3 | AM 运行时环境 | 5h | 🔲 |
-| D4 | 用 RTL 实现迷你 RISC-V 处理器 | 5h | 🔲 |
-| D5 | 设备和输入输出 | 10h | 🔲 |
-| — | D 阶段流片准备与考核 | — | 🔲 |
+| 序号 | 任务 | 预估 |
+|:---:|---|:---:|
+| D1 | 支持 RV32IM 的 NEMU | 10h |
+| D2 | 程序的机器级表示 | 4h |
+| D3 | AM 运行时环境 | 5h |
+| D4 | 用 RTL 实现迷你 RISC-V 处理器 | 5h |
+| D5 | 设备和输入输出 | 10h |
 
-## 详细内容
+## 每项在做什么
 
-### D1 — 支持 RV32IM 的 NEMU
-- 完善 NEMU（NJU Emulator）指令集模拟器
-- 支持 RV32IM 指令集（含乘除法扩展）
-- 为后续差分测试（difftest）打基础
+D1 是把 NEMU 这个指令集模拟器补到能跑 RV32IM，也就是在 RV32I 的基础上加乘除法扩展。后面 D 阶段验证处理器对不对，靠的就是拿 NEMU 当参考做差分测试，所以这一步必须写扎实。
 
-### D2 — 程序的机器级表示
-- 理解汇编与机器码的对应关系
-- 掌握反汇编技巧
-- 学会阅读编译器生成的汇编代码
+D2 讲程序的机器级表示：汇编和机器码怎么对应、反汇编怎么看、编译器生成的汇编该从哪读起。4 小时，重点是把"看汇编"这件事变成习惯。
 
-### D3 — AM 运行时环境
-- AM（Abstract Machine）抽象机器运行时
-- 理解硬件抽象层（HAL）的设计思想
-- 让程序能在不同"机器"上运行
+D3 是 AM，一层很薄的抽象机器运行时。它做的事情是给程序提供一套统一的接口，让同一份程序既能跑在 NEMU 上、也能跑在真正自己写的处理器上。硬件抽象层这个分层想法从这一项开始成形。
 
-### D4 — 用 RTL 实现迷你 RISC-V 处理器（核心）
-- 用 Verilog 实现一个迷你 RISC-V 处理器
-- 与 NEMU 进行差分测试验证正确性
-- 这是第一次"真正的处理器 RTL 实现"
+D4 是用 RTL 实现一个迷你 RISC-V 处理器，第一次真正把处理器写成 Verilog。写完要跟 NEMU 做差分测试，逐步把指令一条条对上。
 
-### D5 — 设备和输入输出
-- 理解内存映射 IO (MMIO)
-- 实现 UART 串口等基本设备
-- 处理器与设备的交互
+D5 讲设备和输入输出：内存映射 IO（MMIO）是怎么回事、UART 这类基本设备怎么接、处理器和设备之间怎么交互。
 
-## 笔记文件
+## 笔记
 
-- `D1-nemu-rv32im.md` — NEMU 完善笔记
-- `D2-machine-representation.md` — 机器级表示笔记
-- `D3-am.md` — AM 运行时环境笔记
-- `D4-mini-riscv-rtl.md` — 迷你 RISC-V RTL 实现笔记
-- `D5-device-io.md` — 设备与 IO 笔记
+还没开始写。
 
-## 代码位置
+## 代码
 
-- NEMU 模拟器: [code/nemu/](../../code/nemu/)
-- AM 运行时: [code/am/](../../code/am/)
-- 处理器 RTL: [code/npc/](../../code/npc/)
+NEMU 在 [code/nemu/](../../code/nemu/)，AM 在 [code/am/](../../code/am/)，处理器 RTL 在 [code/npc/](../../code/npc/)。
 
-## 讲义与资源
+## 讲义和课件
 
-- [D1 讲义](https://ysyx.oscc.cc/docs/2407/d/1.html) | [课件](https://ysyx.oscc.cc/slides/2407/16.html#/) | [视频](https://www.bilibili.com/video/BV1RVmMBaEC6)
-- [D2 讲义](https://ysyx.oscc.cc/docs/2407/d/2.html) | [课件上](https://ysyx.oscc.cc/slides/2306/09.html#/) | [课件下](https://ysyx.oscc.cc/slides/2306/10.html#/)
-- [D3 讲义](https://ysyx.oscc.cc/docs/2407/d/3.html) | [课件](https://ysyx.oscc.cc/slides/2306/11.html#/) | [视频](https://www.bilibili.com/video/BV1Vu4y1s73Y)
-- [D4 讲义](https://ysyx.oscc.cc/docs/2407/d/4.html)
-- [D5 讲义](https://ysyx.oscc.cc/docs/2407/d/5.html) | [课件](https://ysyx.oscc.cc/slides/2306/15.html#/) | [视频](https://www.bilibili.com/video/BV1sb4y1g7Xu)
-- [D 阶段流片准备与考核](https://ysyx.oscc.cc/docs/2407/d/6.html)
+D1 [讲义](https://ysyx.oscc.cc/docs/2407/d/1.html)｜[课件](https://ysyx.oscc.cc/slides/2407/16.html#/)｜[视频](https://www.bilibili.com/video/BV1RVmMBaEC6)
+
+D2 [讲义](https://ysyx.oscc.cc/docs/2407/d/2.html)｜[课件上](https://ysyx.oscc.cc/slides/2306/09.html#/)｜[课件下](https://ysyx.oscc.cc/slides/2306/10.html#/)
+
+D3 [讲义](https://ysyx.oscc.cc/docs/2407/d/3.html)｜[课件](https://ysyx.oscc.cc/slides/2306/11.html#/)｜[视频](https://www.bilibili.com/video/BV1Vu4y1s73Y)
+
+D4 [讲义](https://ysyx.oscc.cc/docs/2407/d/4.html)
+
+D5 [讲义](https://ysyx.oscc.cc/docs/2407/d/5.html)｜[课件](https://ysyx.oscc.cc/slides/2306/15.html#/)｜[视频](https://www.bilibili.com/video/BV1sb4y1g7Xu)
+
+[D 阶段流片准备与考核](https://ysyx.oscc.cc/docs/2407/d/6.html)
