@@ -14,7 +14,7 @@ code/
 
 ## logisim/
 
-现在里面是一个文件 `F3-2to4-decoder.circ`，F3 的电路都塞在这一个文件里，用子电路分开：`decoder24`（带使能端的 2-4 译码器）、`decoder38`、`decoder416`、`seg7`（七段数码管译码器）、`decoder12`、`encoder164`、`encoder164p`（优先编码器）、`Multiplexer121`、`Multiplexer341`、`seg7switch`（能切换十进制和十六进制的七段数码管）、`HalfAdder` 和 `FullAdder`、`YuanMaAdder4bit`（原码加法器）、`FanMaAdder4bit`（反码加法器）、`Adder4bitOverflowJudge`（带溢出判断的补码加法器）。时序部分有 `SRLatch`、`DLatch`、`DLatchReset`、`DFlipFlop`、`DFlipFlopReset`、`DFlipFlopEnReset`、`Register4Bit`、`Counter4Bit`、`Sum1to10`（数列求和），以及电子时钟的 `Digit9`、`Digit5`、`EClock`。
+现在里面是一个文件 `F3-2to4-decoder.circ`，F3 的电路都塞在这一个文件里，用子电路分开：`decoder24`（带使能端的 2-4 译码器）、`decoder38`、`decoder416`、`seg7`（七段数码管译码器）、`decoder12`、`encoder164`、`encoder164p`（优先编码器）、`Multiplexer121`、`Multiplexer341`、`seg7switch`（能切换十进制和十六进制的七段数码管）、`HalfAdder` 和 `FullAdder`、`YuanMaAdder4bit`（原码加法器）、`FanMaAdder4bit`（反码加法器）、`Adder4bitOverflowJudge`（带溢出判断的补码加法器）。时序部分有 `SRLatch`、`DLatch`、`DLatchReset`、`DFlipFlop`、`DFlipFlopReset`、`DFlipFlopEnReset`、`Register4Bit`、`Counter4Bit`、`Sum1to10`（数列求和），以及电子时钟的 `Digit9`、`Digit5`、`EClock`。F5 的部分有 `SumRom`（8字×8位 ROM）、`Fetch`（PC 加 ROM 的取指电路）、`Reg8`（8位寄存器）、`GPR`（4字×8位寄存器堆）和 `Scpu`（只支持 li 指令的处理器）。
 
 做成一个文件是因为 Logisim 的子电路可以互相调用，比如 `decoder38` 里直接放了两个 `decoder24` 实例，改公共部分的时候不用两边同步。
 
